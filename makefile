@@ -28,6 +28,9 @@ ddaalgo: DDAalgorithm.c
 dalgo: ddalgo.c
 	$(CC) $< $(CFLAGS) -o $@
 
+bres: Bresenhamsalgorithm.c
+	$(CC) $< $(CFLAGS) -o $@
+
 clean:
 	rm -f $(TARGETS)
 
