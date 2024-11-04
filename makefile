@@ -1,37 +1,23 @@
-#make file for computer graphics
-
 CC = gcc
-CFLAGS = -lglut -lGL -lGLU -lm -Wpedantic -Werror -Wextra -Wall
-TARGETS = line linestrip poly triangle points ddaalgo lineloop
+CFLAGS = -Wall -Wextra -Werror -Wpedantic -lglut -lGL -lGLU -lm
 
-line: OGLline.c
+SOURCES = OGLline.c OGLlinestrip.c OGLlineloop.c OGLpoints.c OGLtriangle.c OGLpolygon.c DDAalgorithm.c Bresenhamsalgorithm.c
+
+TARGET = $(SOURCES:.c=)
+
+all: $(TARGETS)
+
+%: %.c
 	$(CC) $< $(CFLAGS) -o $@
 
-linestrip: OGLline_strip.c
-	$(CC) $< $(CFLAGS) -o $@
-
-lineloop: OGLlineloop.c
-	$(CC) $< $(CFLAGS) -o $@
-
-poly: OGLpolygon.c
-	$(CC) $< $(CFLAGS) -o $@
-
-triangle: OGLtriangle.c
-	$(CC) $< $(CFLAGS) -o $@
-
-points: OGLpoints.c
-	$(CC) $< $(CFLAGS) -o $@
-
-ddaalgo: DDAalgorithm.c
-	$(CC) $< $(CFLAGS) -o $@
-
-dalgo: ddalgo.c
-	$(CC) $< $(CFLAGS) -o $@
+#bres and dda are not really necessary they only simplify the target name
+#when calling the function instead of using the long names.
 
 bres: Bresenhamsalgorithm.c
 	$(CC) $< $(CFLAGS) -o $@
 
+dda: DDAalgorithm.c
+	$(CC) $< $(CFLAGS) -o $@
+
 clean:
 	rm -f $(TARGETS)
-
-
