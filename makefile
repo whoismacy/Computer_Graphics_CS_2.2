@@ -1,7 +1,7 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -Wpedantic -lglut -lGL -lGLU -lm
+CFLAGS = -Wall -Wextra -Wpedantic -lglut -lGL -lGLU -lm
 
-SOURCES = OGLline.c OGLlinestrip.c OGLlineloop.c OGLpoints.c OGLtriangle.c OGLpolygon.c DDAalgorithm.c Bresenhamsalgorithm.c
+SOURCES = OGLline.c OGLlinestrip.c OGLlineloop.c OGLpoints.c OGLtriangle.c OGLpolygon.c 
 
 TARGET = $(SOURCES:.c=)
 
@@ -10,14 +10,20 @@ all: $(TARGETS)
 %: %.c
 	$(CC) $< $(CFLAGS) -o $@
 
-#bres and dda are not really necessary they only simplify the target name
-#when calling the function instead of using the long names.
-
-bres: Bresenhamsalgorithm.c
+bres: BresenhamAlgorithm.c
 	$(CC) $< $(CFLAGS) -o $@
 
 dda: DDAalgorithm.c
 	$(CC) $< $(CFLAGS) -o $@
 
+mlda: MidpointLineDrawingAlgorithm.c
+	$(CC) $< $(CFLAGS) -o $@
+
+mca: MidpointCircleAlgorithm.c
+	$(CC) $< $(CFLAGS) -o $@
+
 clean:
-	rm -f $(TARGETS)
+	rm -f $(TARGET)
+	rm -f bres
+	rm -f dda
+	rm -f mlda
